@@ -13,14 +13,14 @@ create table schedule (
 
 insert into schedule (nama_maskapai, nama_pilot, kode_penerbangan, kelas, bandara_asal, bandara_tujuan, waktu, tanggal) 
 values
-	('dr. Nurita', 'Ahmad Maulana', 'male', '["headache", "stomache"]', 62838, 'address1', '08:00', '2023-10-01'),
-	('dr. Yogi', 'Renata Zahab', 'female', '["cough", "flu"]', 62838, 'address2', '09:00', '2022-10-02'),
-	('dr. Wibowo', 'Nunuk Reni', 'female', '["cough", "flu"]', 62838, 'address3', '10:00', '2022-10-03'),
-	('dr. Yogi', 'Bro Ulil', 'male', '["cough", "headache"]', 62838, 'address4', '11:00', '2022-10-04'),
-	('dr. Ulama', 'Wah Bowi', 'male', '["headache", "flu"]', 62838, 'address5', '12:00', '2022-10-05'),
-	('dr. Ulama', 'Iis Mika', 'female', '["cough", "flu", "stomache", "headache"]', 62838, 'address6', '08:00', '2022-10-06'),
-	('dr. Ping', 'Zizah Lana', 'female', '["flu", "stomache", "headache"]', 62838, 'address7', '09:00', '2022-10-07'),
-	('dr. Nurita', 'Alif Iman', 'male', '["cough", "flu", "headache"]', 62838, 'address8', '10:00', '2022-10-08'),
-	('dr. Ping', 'Zaka Zaki', 'female', '["cough", "stomache", "headache"]', 62838, 'address9', '11:00', '2022-10-09'),
-	('dr. Wibowo', 'Faus Rahmi', 'male', '["cough"]', 62838, 'address10', '12:00', '2022-10-11')
+	('Amelia Airlines', 'Amelia Rodriguez', 'AK009', '["economy", "business"]', 'Soekarno-Hatta', 'Ngurah Rai', '08:00', '2023-10-01'),
+	('HaykalAir', 'Daniel Clarke', 'FH027', '["business", "comfort"]', 'Juanda', 'Kualanamu', '09:00', '2022-10-02'),
+	('AirRindah', 'Emily Walker', 'AM088', '["comfort", "business"]', 'Kuala Lumpur', 'Changi', '10:00', '2022-10-03'),
+	('Ratna Airlines', 'Joshua Anderson', 'RM097', '["business", "economy"]', 'Dubai', 'Heathrow', '11:00', '2022-10-04'),
+	('AbghazAir', 'Sophia Lee', 'AB100', '["economy", "amatiran"]', 'Changi', 'Incheon', '12:00', '2022-10-05'),
+	('Amelia Airlines', 'Alex Morgan', 'AK009', '["comfort", "economy", "amatiran", "business"]', 'Hong Kong', 'Narita', '08:00', '2022-10-06'),
+	('AirRindah', 'Ryan Mitchell', 'AM088', '["comfot", "amatiran", "economy"]', 'Sydney', 'Charles de Gaulle', '09:00', '2022-10-07'),
+	('AbghazAir', 'Isabella Turner', 'AB100', '["amatiran", "comfort", "business"]', 'Istanbul', 'Los Angeles', '10:00', '2022-10-08'),
+	('Ratna Airlines', 'Nathan Carter', 'RM097', '["business", "comfort", "economy"]', 'Haneda', 'Heathrow', '11:00', '2022-10-09'),
+	('HaykalAir', 'Olivia Hayes', 'FH027', '["amatiran"]', 'Kuala Lumpur', 'Sydney', '12:00', '2022-10-11')
 	;
