@@ -1,17 +1,17 @@
 drop table if exists schedule;
 create table schedule (
 	id serial,
-	doctor_name text,
-	patient_name text,
-	gender text,
-	symptom text,
-	handphone text,
-	address text,
+	nama_maskapai text,
+	nama_pilot text,
+	kode_penerbangan text,
+	kelas text,
+	bandara_asal text,
+	bandara_tujuan text,
 	waktu time,
 	tanggal date
 );
 
-insert into schedule (doctor_name, patient_name, gender, symptom, handphone, address, waktu, tanggal) 
+insert into schedule (nama_maskapai, nama_pilot, kode_penerbangan, kelas, bandara_asal, bandara_tujuan, waktu, tanggal) 
 values
 	('dr. Nurita', 'Ahmad Maulana', 'male', '["headache", "stomache"]', 62838, 'address1', '08:00', '2023-10-01'),
 	('dr. Yogi', 'Renata Zahab', 'female', '["cough", "flu"]', 62838, 'address2', '09:00', '2022-10-02'),
