@@ -1,5 +1,5 @@
-drop table if exists schedule;
-create table schedule (
+drop table if exists airport;
+create table airport (
 	id serial,
 	nama_maskapai text,
 	nama_pilot text,
@@ -10,8 +10,7 @@ create table schedule (
 	waktu time,
 	tanggal date
 );
-
-insert into schedule (nama_maskapai, nama_pilot, kode_penerbangan, kelas, bandara_asal, bandara_tujuan, waktu, tanggal) 
+insert into airport (nama_maskapai, nama_pilot, kode_penerbangan, kelas, bandara_asal, bandara_tujuan, waktu, tanggal) 
 values
 	('Amelia Airlines', 'Amelia Rodriguez', 'AK009', '["economy", "business"]', 'Soekarno-Hatta', 'Ngurah Rai', '08:00', '2023-10-01'),
 	('HaykalAir', 'Daniel Clarke', 'FH027', '["business", "comfort"]', 'Juanda', 'Kualanamu', '09:00', '2022-10-02'),
