@@ -7,7 +7,7 @@ list_kode = ['', 'AK009', 'FH027', 'AM088', 'RM097', 'AB100']
 conn = st.connection("postgresql", type="sql", 
                      url="postgresql://AmeliaKurnia:AyZa67mtESxw@ep-morning-glade-50476120.us-east-2.aws.neon.tech/fp3")
 with conn.session as session:
-    query = text('CREATE TABLE IF NOT EXISTS SCHEDULE (id serial, nama_maskapai varchar, nama_pilot varchar, kode_penerbangan char(25), \
+    query = text('CREATE TABLE IF NOT EXISTS AIRPORT (id serial, nama_maskapai varchar, nama_pilot varchar, kode_penerbangan char(25), \
                                                        kelas text, bandara_asal varchar, bandara_tujuan text, tanggal date);')
     session.execute(query)
 
@@ -15,18 +15,18 @@ st.header("AIRPORT GROUP FOUR'S DATA MANAGEMENT SYSTEM")
 page = st.sidebar.selectbox("Pilih Menu", ["View Data","Edit Data"])
 
 if page == "View Data":
-    data = conn.query('SELECT * FROM schedule ORDER By id;', ttl="0").set_index('id')
+    data = conn.query('SELECT * FROM airport ORDER By id;', ttl="0").set_index('id')
     st.dataframe(data)
 
 if page == "Edit Data":
     if st.button('Tambah Data'):
         with conn.session as session:
-            query = text('INSERT INTO schedule (nama_maskapai, nama_pilot, kode_penerbangan, kelas, bandara_asal, bandara_tujuan, waktu, tanggal) \
+            query = text('INSERT INTO airport (nama_maskapai, nama_pilot, kode_penerbangan, kelas, bandara_asal, bandara_tujuan, waktu, tanggal) \
                           VALUES (:1, :2, :3, :4, :5, :6, :7, :8);')
             session.execute(query, {'1':'', '2':'', '3':'', '4':'[]', '5':'', '6':'', '7':None, '8':None})
             session.commit()
 
-    data = conn.query('SELECT * FROM schedule ORDER By id;', ttl="0")
+    data = conn.query('SELECT * FROM airport ORDER By id;', ttl="0")
     for _, result in data.iterrows():        
         id = result['id']
         nama_maskapai_lama = result["nama_maskapai"]
@@ -54,7 +54,7 @@ if page == "Edit Data":
                 with col1:
                     if st.form_submit_button('UPDATE'):
                         with conn.session as session:
-                            query = text('UPDATE schedule \
+                            query = text('UPDATE airport \
                                           SET nama_maskapai=:1, nama_pilot=:2, kode_penerbangan=:3, kelas=:4, \
                                           bandara_asal=:5, bandara_tujuan=:6, waktu=:7, tanggal=:8 \
                                           WHERE id=:9;')
@@ -65,7 +65,7 @@ if page == "Edit Data":
                 
                 with col2:
                     if st.form_submit_button('DELETE'):
-                        query = text(f'DELETE FROM schedule WHERE id=:1;')
+                        query = text(f'DELETE FROM airport WHERE id=:1;')
                         session.execute(query, {'1':id})
                         session.commit()
                         st.experimental_rerun()
