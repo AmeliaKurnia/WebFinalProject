@@ -50,7 +50,8 @@ if page == "Edit Data":
                 nama_maskapai_baru = st.selectbox("nama_maskapai", list_maskapai, list_maskapai.index(nama_maskapai_lama))
                 nama_pilot_baru = st.text_input("nama_pilot", nama_pilot_lama)
                 kode_penerbangan_baru = st.selectbox("kode_penerbangan", list_kode, list_kode.index(kode_penerbangan_lama))
-                kelas_baru = st.multiselect("kelas", ['economy', 'comfort', 'business', 'amatiran'], eval(kelas_lama) if eval(kelas_lama) and isinstance(eval(kelas_lama), list) else [])
+                default_kelas = eval(kelas_lama) if eval(kelas_lama) and isinstance(eval(kelas_lama), list) else []
+                kelas_baru = st.multiselect("kelas", ['economy', 'comfort', 'business', 'amatiran'], default=default_kelas)
                 bandara_asal_baru = st.text_input("bandara_asal", bandara_asal_lama)
                 bandara_tujuan_baru = st.text_input("bandara_tujuan", bandara_tujuan_lama)
                 waktu_baru = st.time_input("waktu", waktu_lama)
