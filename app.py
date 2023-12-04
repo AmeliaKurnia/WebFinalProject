@@ -12,17 +12,18 @@ with conn.session as session:
     session.execute(query)
 
 st.header("AIRPORT GROUP FOUR'S DATA MANAGEMENT SYSTEM")
-st.markdown("## Kelompok 4:")
-st.markdown("1. Amelia Kurnia Fitri (2043221009)")
-st.markdown("2. Fhikri Haykal Oktarianto (2043221027)")
-st.markdown("3. Arindah Maharani Saputri (2043221088)")
-st.markdown("4. Ratna Maulidah Wulandari (2043221097)")
-st.markdown("5. Abghaza Bayu Kusuma W. P. (2043221100)")
 page = st.sidebar.selectbox("Pilih Menu", ["View Data","Edit Data"])
 
 if page == "View Data":
     data = conn.query('SELECT * FROM airport ORDER By id;', ttl="0").set_index('id')
     st.dataframe(data)
+
+    st.markdown("## Kelompok 4:")
+    st.markdown("1. Amelia Kurnia Fitri (2043221009)")
+    st.markdown("2. Fhikri Haykal Oktarianto (2043221027)")
+    st.markdown("3. Arindah Maharani Saputri (2043221088)")
+    st.markdown("4. Ratna Maulidah Wulandari (2043221097)")
+    st.markdown("5. Abghaza Bayu Kusuma W. P. (2043221100)")
 
 if page == "Edit Data":
     if st.button('Tambah Data'):
