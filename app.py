@@ -11,7 +11,7 @@ with conn.session as session:
                                                        kelas text, bandara_asal varchar, bandara_tujuan text, tanggal date);')
     session.execute(query)
 
-st.header("AIRPORT GROUP FOUR'S DATA MANAGEMENT SYSTEM")
+st.header("FlyTrack Group Four'S Data Management System")
 page = st.sidebar.selectbox("Pilih Menu", ["View Data","Edit Data"])
 
 if page == "View Data":
