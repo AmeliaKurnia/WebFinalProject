@@ -10,9 +10,9 @@ st.set_page_config(
 
 list_maskapai = ['', 'Amelia Airlines', 'HaykalAir', 'AirRindah', 'Ratna Airlines', 'AbghazAir']
 list_kode = ['', 'AK009', 'FH027', 'AM088', 'RM097', 'AB100']
-list_airport = ['', 'Juanda', 'Ngurah Rai', 'Soekarno-Hatta', 'Sultan Hasanuddin', 'Adisutjipto']  
+list_airport = ['', 'Juanda', 'Ngurah Rai', 'Soekarno-Hatta', 'Sultan Hasanuddin', 'Adisutjipto']
 
-conn = st.connection("postgresql", type="sql", 
+conn = st.connection("postgresql", type="sql",
                      url="postgresql://AmeliaKurnia:AyZa67mtESxw@ep-morning-glade-50476120.us-east-2.aws.neon.tech/fp3")
 
 with conn.session as session:
@@ -27,7 +27,8 @@ if page == "View Data":
     search_input = st.sidebar.text_input("Search", "")
 
     # Fetch data based on search input
-    data = conn.query('SELECT * FROM airport WHERE LOWER(nama_pilot) LIKE LOWER(:search) ORDER By id;', ttl="0", search=f"%{search_input}%").set_index('id')
+    query_str = f'SELECT * FROM airport WHERE LOWER(nama_pilot) LIKE LOWER(\'%{search_input}%\') ORDER By id;'
+    data = conn.query(query_str, ttl="0").set_index('id')
     st.dataframe(data)
 
     st.markdown("## Kelompok 4:")
@@ -42,7 +43,7 @@ if page == "Edit Data":
         with conn.session as session:
             query = text('INSERT INTO airport (nama_maskapai, nama_pilot, kode_penerbangan, kelas, bandara_asal, bandara_tujuan, waktu, tanggal) \
                           VALUES (:1, :2, :3, :4, :5, :6, :7, :8);')
-            session.execute(query, {'1':'', '2':'', '3':'', '4':'[]', '5':'', '6':'', '7':None, '8':None})
+            session.execute(query, {'1': '', '2': '', '3': '', '4': '[]', '5': '', '6': '', '7': None, '8': None})
             session.commit()
 
     data = conn.query('SELECT * FROM airport ORDER By id;', ttl="0")
@@ -59,13 +60,19 @@ if page == "Edit Data":
 
         with st.expander(f'a.n. {nama_pilot_lama}'):
             with st.form(f'data-{id}'):
-                nama_maskapai_baru = st.selectbox("nama_maskapai", list_maskapai, list_maskapai.index(nama_maskapai_lama))
+                nama_maskapai_baru = st.selectbox("nama_maskapai", list_maskapai,
+                                                  list_maskapai.index(nama_maskapai_lama))
                 nama_pilot_baru = st.text_input("nama_pilot", nama_pilot_lama)
-                kode_penerbangan_baru = st.selectbox("kode_penerbangan", list_kode, list_kode.index(kode_penerbangan_lama))
+                kode_penerbangan_baru = st.selectbox("kode_penerbangan", list_kode,
+                                                     list_kode.index(kode_penerbangan_lama))
                 default_kelas = eval(kelas_lama) if eval(kelas_lama) and isinstance(eval(kelas_lama), list) else []
-                kelas_baru = st.multiselect("kelas", ['economy', 'comfort', 'business', 'amatiran'], default=list(set(default_kelas) & set(['economy', 'comfort', 'business', 'premium'])))
-                bandara_asal_baru = st.selectbox("bandara_asal", list_airport, list_airport.index(bandara_asal_lama))
-                bandara_tujuan_baru = st.selectbox("bandara_tujuan", list_airport, list_airport.index(bandara_tujuan_lama))
+                kelas_baru = st.multiselect("kelas", ['economy', 'comfort', 'business', 'amatiran'],
+                                           default=list(set(default_kelas) & set(
+                                               ['economy', 'comfort', 'business', 'premium'])))
+                bandara_asal_baru = st.selectbox("bandara_asal", list_airport,
+                                                list_airport.index(bandara_asal_lama))
+                bandara_tujuan_baru = st.selectbox("bandara_tujuan", list_airport,
+                                                  list_airport.index(bandara_tujuan_lama))
                 waktu_baru = st.time_input("waktu", waktu_lama)
                 tanggal_baru = st.date_input("tanggal", tanggal_lama)
 
@@ -78,14 +85,16 @@ if page == "Edit Data":
                                           SET nama_maskapai=:1, nama_pilot=:2, kode_penerbangan=:3, kelas=:4, \
                                           bandara_asal=:5, bandara_tujuan=:6, waktu=:7, tanggal=:8 \
                                           WHERE id=:9;')
-                            session.execute(query, {'1':nama_maskapai_baru, '2':nama_pilot_baru, '3':kode_penerbangan_baru, '4':str(kelas_baru), 
-                                                    '5':bandara_asal_baru, '6':bandara_tujuan_baru, '7':waktu_baru, '8':tanggal_baru, '9':id})
+                            session.execute(query, {'1': nama_maskapai_baru, '2': nama_pilot_baru,
+                                                    '3': kode_penerbangan_baru, '4': str(kelas_baru),
+                                                    '5': bandara_asal_baru, '6': bandara_tujuan_baru,
+                                                    '7': waktu_baru, '8': tanggal_baru, '9': id})
                             session.commit()
                             st.experimental_rerun()
 
                 with col2:
                     if st.form_submit_button('DELETE'):
                         query = text(f'DELETE FROM airport WHERE id=:1;')
-                        session.execute(query, {'1':id})
+                        session.execute(query, {'1': id})
                         session.commit()
                         st.experimental_rerun()
