@@ -1,6 +1,13 @@
 import streamlit as st
 from sqlalchemy import text
 
+st.set_page_config(
+    page_title="FlyTrack Group Four's Data Management System",
+    page_icon="✈️",
+    layout="wide",
+    initial_sidebar_state="collapsed",
+)
+
 list_maskapai = ['', 'Amelia Airlines', 'HaykalAir', 'AirRindah', 'Ratna Airlines', 'AbghazAir']
 list_kode = ['', 'AK009', 'FH027', 'AM088', 'RM097', 'AB100']
 list_airport = ['', 'Juanda', 'Ngurah Rai', 'Soekarno-Hatta', 'Sultan Hasanuddin', 'Adisutjipto']  # Add airport options
@@ -12,13 +19,6 @@ with conn.session as session:
     query = text('CREATE TABLE IF NOT EXISTS AIRPORT (id serial, nama_maskapai varchar, nama_pilot varchar, kode_penerbangan char(25), \
                                                        kelas text, bandara_asal varchar, bandara_tujuan text, waktu time, tanggal date);')
     session.execute(query)
-
-st.set_page_config(
-    page_title="FlyTrack Group Four's Data Management System",
-    page_icon="✈️",
-    layout="wide",
-    initial_sidebar_state="collapsed",
-)
 
 st.header("FlyTrack Group Four'S Data Management System")
 page = st.sidebar.selectbox("Pilih Menu", ["View Data","Edit Data"])
