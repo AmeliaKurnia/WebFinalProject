@@ -66,7 +66,7 @@ if page == "Edit Data":
                 kode_penerbangan_baru = st.selectbox("kode_penerbangan", list_kode,
                                                      list_kode.index(kode_penerbangan_lama))
                 default_kelas = eval(kelas_lama) if eval(kelas_lama) and isinstance(eval(kelas_lama), list) else []
-                kelas_baru = st.multiselect("kelas", ['economy', 'comfort', 'business', 'amatiran'],
+                kelas_baru = st.multiselect("kelas", ['economy', 'comfort', 'business', 'premium'],
                                            default=list(set(default_kelas) & set(
                                                ['economy', 'comfort', 'business', 'premium'])))
                 bandara_asal_baru = st.selectbox("bandara_asal", list_airport,
