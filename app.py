@@ -27,7 +27,7 @@ if page == "View Data":
     search_input = st.sidebar.text_input("Search", "")
 
     # Fetch data based on search input
-    query_str = f'SELECT * FROM airport WHERE LOWER(nama_pilot) LIKE LOWER(\'%{search_input}%\') ORDER By id;'
+    query_str = f"SELECT * FROM airport WHERE LOWER(nama_pilot) LIKE LOWER('%{search_input}%') OR LOWER(bandara_asal) LIKE LOWER('%{search_input}%') OR LOWER(bandara_tujuan) LIKE LOWER('%{search_input}%') ORDER By id;"
     data = conn.query(query_str, ttl="0").set_index('id')
     st.dataframe(data)
 
