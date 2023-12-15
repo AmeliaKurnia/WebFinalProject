@@ -10,13 +10,7 @@ st.set_page_config(
 
 list_maskapai = ['', 'Amelia Airlines', 'HaykalAir', 'AirRindah', 'Ratna Airlines', 'AbghazAir']
 list_kode = ['', 'AK009', 'FH027', 'AM088', 'RM097', 'AB100']
-list_airport = {
-    'Juanda': 'https://www.juanda-airport.com/',
-    'Ngurah Rai': 'https://www.baliairport.com/',
-    'Soekarno-Hatta': 'https://soekarnohatta-airport.co.id/',
-    'Sultan Hasanuddin': 'https://www.hasanuddin-airport.com/',
-    'Adisutjipto': 'https://adisutjipto-airport.co.id/'
-}
+list_airport = ['', 'Juanda', 'Ngurah Rai', 'Soekarno-Hatta', 'Sultan Hasanuddin', 'Adisutjipto']
 
 conn = st.connection("postgresql", type="sql",
                      url="postgresql://AmeliaKurnia:AyZa67mtESxw@ep-morning-glade-50476120.us-east-2.aws.neon.tech/fp3")
@@ -26,23 +20,7 @@ with conn.session as session:
                                                        kelas text, bandara_asal varchar, bandara_tujuan varchar, waktu time, tanggal date);')
     session.execute(query)
 
-st.header("✈️FlyTrack Group Four'S Data Management System")
-
-# Fungsi untuk membuat kotak dengan border dan background
-def styled_textbox(text_content):
-    return f'<div style="border: 1px solid #ddd; background-color: #f9f9f9; padding: 10px; border-radius: 5px;">{text_content}</div>'
-
-# 5 Textbox untuk nama bandara dan link
-st.markdown(styled_textbox(f"**Nama Bandara:** Juanda\n**Link:** [Juanda Airport](https://www.juanda-airport.com/)"))
-
-st.markdown(styled_textbox(f"**Nama Bandara:** Ngurah Rai\n**Link:** [Ngurah Rai Airport](https://www.baliairport.com/)"))
-
-st.markdown(styled_textbox(f"**Nama Bandara:** Soekarno-Hatta\n**Link:** [Soekarno-Hatta Airport](https://soekarnohatta-airport.co.id/)"))
-
-st.markdown(styled_textbox(f"**Nama Bandara:** Sultan Hasanuddin\n**Link:** [Sultan Hasanuddin Airport](https://www.hasanuddin-airport.com/)"))
-
-st.markdown(styled_textbox(f"**Nama Bandara:** Adisutjipto\n**Link:** [Adisutjipto Airport](https://adisutjipto-airport.co.id/)"))
-
+st.header("FlyTrack Group Four'S Data Management System")
 page = st.sidebar.selectbox("Pilih Menu", ["View Data", "Edit Data"])
 
 if page == "View Data":
@@ -91,10 +69,10 @@ if page == "Edit Data":
                 kelas_baru = st.multiselect("kelas", ['economy', 'comfort', 'business', 'premium'],
                                            default=list(set(default_kelas) & set(
                                                ['economy', 'comfort', 'business', 'premium'])))
-                bandara_asal_baru = st.selectbox("bandara_asal", list_airport.keys(),
-                                                list_airport.keys().index(bandara_asal_lama))
-                bandara_tujuan_baru = st.selectbox("bandara_tujuan", list_airport.keys(),
-                                                  list_airport.keys().index(bandara_tujuan_lama))
+                bandara_asal_baru = st.selectbox("bandara_asal", list_airport,
+                                                list_airport.index(bandara_asal_lama))
+                bandara_tujuan_baru = st.selectbox("bandara_tujuan", list_airport,
+                                                  list_airport.index(bandara_tujuan_lama))
                 waktu_baru = st.time_input("waktu", waktu_lama)
                 tanggal_baru = st.date_input("tanggal", tanggal_lama)
 
