@@ -24,7 +24,7 @@ st.header("FlyTrack Group Four'S Data Management System")
 page = st.sidebar.selectbox("Pilih Menu", ["View Data", "Edit Data"])
 
 if page == "View Data":
-    search_input = st.sidebar.text_input("Search", "")
+    search_input = st.sidebar.text_input("Cari Nama Pilot", "")
 
     # Fetch data based on search input
     query_str = f"SELECT * FROM airport WHERE LOWER(nama_pilot) LIKE LOWER('%{search_input}%') OR LOWER(bandara_asal) LIKE LOWER('%{search_input}%') OR LOWER(bandara_tujuan) LIKE LOWER('%{search_input}%') ORDER By id;"
