@@ -3,7 +3,7 @@ from sqlalchemy import text
 
 list_maskapai = ['', 'Amelia Airlines', 'HaykalAir', 'AirRindah', 'Ratna Airlines', 'AbghazAir']
 list_kode = ['', 'AK009', 'FH027', 'AM088', 'RM097', 'AB100']
-list_airport = ['', 'Juanda', 'Ngurah Rai', 'Soekarno-Hatta', 'Sultan Hasanuddin', 'Adisutjipto'] 
+list_airport = ['', 'Juanda', 'Ngurah Rai', 'Soekarno-Hatta', 'Sultan Hasanuddin', 'Adisutjipto']  # Add airport options
 
 conn = st.connection("postgresql", type="sql", 
                      url="postgresql://AmeliaKurnia:AyZa67mtESxw@ep-morning-glade-50476120.us-east-2.aws.neon.tech/fp3")
@@ -36,7 +36,7 @@ if page == "View Data":
 
 if page == "Edit Data":
     search_input = st.sidebar.text_input("Search", "")
-    
+        
     if st.button('Tambah Data'):
         with conn.session as session:
             query = text('INSERT INTO airport (nama_maskapai, nama_pilot, kode_penerbangan, kelas, bandara_asal, bandara_tujuan, waktu, tanggal) \
@@ -62,7 +62,7 @@ if page == "Edit Data":
                 nama_pilot_baru = st.text_input("nama_pilot", nama_pilot_lama)
                 kode_penerbangan_baru = st.selectbox("kode_penerbangan", list_kode, list_kode.index(kode_penerbangan_lama))
                 default_kelas = eval(kelas_lama) if eval(kelas_lama) and isinstance(eval(kelas_lama), list) else []
-                kelas_baru = st.multiselect("kelas", ['economy', 'comfort', 'business', 'amatiran'], default=list(set(default_kelas) & set(['economy', 'comfort', 'business', 'premium'])))
+                kelas_baru = st.multiselect("kelas", ['economy', 'comfort', 'business', 'amatiran'], default=list(set(default_kelas) & set(['economy', 'comfort', 'business', 'amatiran'])))
                 bandara_asal_baru = st.selectbox("bandara_asal", list_airport, list_airport.index(bandara_asal_lama))
                 bandara_tujuan_baru = st.selectbox("bandara_tujuan", list_airport, list_airport.index(bandara_tujuan_lama))
                 waktu_baru = st.time_input("waktu", waktu_lama)
